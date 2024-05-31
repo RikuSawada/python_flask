@@ -4,9 +4,9 @@ services:
     image: mysql:8.0
     restart: always
     volumes:
-      - .\mysql\initdb.d:/docker-entrypoint-initdb.d
-      - .\mysql\conf.d:/etc/mysql/conf.d
-      - .\mysql\log\ysql:/var/log/mysql
+      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
+      - ./mysql/conf.d:/etc/mysql/conf.d
+      - ./mysql/log\ysql:/var/log/mysql
     environment:
       MYSQL_DATABASE: app_db
       MYSQL_USER: user
