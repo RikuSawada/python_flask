@@ -1,0 +1,34 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    volumes:
+      - .\mysql\initdb.d:/docker-entrypoint-initdb.d
+      - .\mysql\conf.d:/etc/mysql/conf.d
+      - .\mysql\log\ysql:/var/log/mysql
+    environment:
+      MYSQL_DATABASE: app_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: rootpassword
+    command: --default-authentication-plugin=mysql_native_password
+    expose:
+      - 3306
+
+  flask:
+    build: backend/
+    volumes:
+      - ./backend:/code
+    environment:
+      MYSQL_DATABASE: sample_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "5000:5000"
+    command: flask run --host 0.0.0.0 --port 5000
+    links:
+      - db
+    depends_on:
+      - db
