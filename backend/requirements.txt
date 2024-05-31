@@ -2,3 +2,5 @@ flask
 flask-cors
 PyMySQL
 cryptography
+Flask-Injector
+injector
