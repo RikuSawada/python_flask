@@ -3,7 +3,7 @@ import pymysql.cursors
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-from controllers.comments import comments_bp
+from controllers.comments_controller import comments_bp
 
 app = Flask(__name__)
 CORS(app)
